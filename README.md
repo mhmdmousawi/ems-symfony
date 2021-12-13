@@ -25,17 +25,17 @@ cd ems-symfony
 
 3. Run the docker container to start the project:
 ```bash
-docker-compose up -d --build database && docker-compose up -d --build app && docker-compose up -d --build web
+docker-compose up -d --build 
 ```
 
 later you can only use ``docker-compose up -d`` inside your root directory
 
-Once you can access the web application throw the port defined in `docker-compose.yml` file port `:8990`
-and the database throw port `:8991`
+Once you can access the web application throw the port defined in `.env` file port `:8101`
+and the database throw port `:33016` (also you can access phpmyadmin webpage for DB managing throw port: `8102`)
 
 4. Access the container:
 ```bash
-docker exec -it  ems-symfony-server bash
+docker exec -it ems-symfony-server bash
 ```
 
 5. Run the migrations inside the container, and then clear the cache:
@@ -47,7 +47,19 @@ php bin/console doctrine:migrations:execute --up 'DoctrineMigrations\Version2021
 ```
 ## Configuration
 
-- Configuration is already done. But in case you want to change anything please feel free to update the .env file before running the containers.
+- Configuration is already done. But in case you want to change anything please feel free to update the `.env` file before running the containers.
+
+```bash 
+APP_NAME=ems-symfony
+APP_PORT=8101
+APP_DB_ADMIN_PORT=8102
+DB_PORT=33016
+
+MYSQL_ROOT_PASS=superSecr3t
+MYSQL_USER=app_user
+MYSQL_PASS=t3rceS
+MYSQL_DB=ems-symfony
+```
 
 ## Testing
 Now that you have set your project up, it's time for fun testing. <br>
@@ -57,3 +69,10 @@ Now to help you check all the API endpoints, I have prepared a Postman Collectio
 https://drive.google.com/drive/folders/1Vnksa2_blbvARvoXKTopnYExG6LvQo-3?usp=sharing
 
 Happy Testing! :)
+
+## Improvements
+Of course this project can be enhanced a lot, where it can have: 
+- User authentication
+- List filtering
+- List pagination
+- etc .. 
